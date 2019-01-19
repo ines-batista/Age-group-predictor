@@ -1,0 +1,445 @@
+---
+title: "Final work of Bioestatistics"
+author: "Inês Félix | Xavier Pinho"
+date: "November 29, 2017"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+dados1 <- (read.table('grupo10.csv',header = TRUE, sep=","))
+library(ggplot2)
+```
+
+#Analysis of the quantitative variables
+
+#Rhythm1
+
+```{r}
+
+boxplot(dados1$ritmo1~dados1$idade, xlab = "Age", ylab = "rhythm1", names = c("Younger than","Older than"), main = "Boxplot of rhythm1 due to age", col=c('grey','red'))
+```
+
+#Click1
+
+```{r}
+boxplot(dados1$click1~dados1$idade, xlab = "Age", ylab = "click1", names =c("Younger than","Older than"), main = "Boxplot of click1 due to age", col=c('grey','red'))
+
+```
+
+#Double1
+
+```{r}
+boxplot(dados1$duplo1~dados1$idade, xlab = "Age", ylab = "double1", names = c("Younger than","Older than"), main = "Boxplot of double1 due to age", col=c('grey','red'))
+
+```
+
+#Rhythm2
+
+```{r}
+
+boxplot(dados1$ritmo2~dados1$idade, xlab = "Age", ylab = "rhythm2", names = c("Younger than","Older than"), main = "Boxplot of rhythm2 due to age", col=c('grey','red'))
+```
+
+#Click2
+
+```{r}
+boxplot(dados1$click2~dados1$idade, xlab = "Age", ylab = "click2", names = c("Younger than","Older than"), main = "Boxplot of click2 due to age", col=c('grey','red'))
+
+```
+
+#Double2
+
+```{r}
+boxplot(dados1$duplo2~dados1$idade, xlab = "Age", ylab = "double3", names = c("Younger than","Older than"), main = "Boxplot of double 3 due to age", col=c('grey','red'))
+
+```
+
+#Rhythm3
+
+```{r}
+
+boxplot(dados1$ritmo3~dados1$idade, xlab = "Age", ylab = "rhythm3", names = c("Younger than","Older than"), main = "Boxplot of rhythm3 due to age", col=c('grey','red'))
+```
+
+#Click3
+
+```{r}
+boxplot(dados1$click3~dados1$idade, xlab = "Age", ylab = "click3", names = c("Younger than","Older than"), main = "Boxplot of click3 due to age", col=c('grey','red'))
+
+```
+
+#Double3
+
+```{r}
+boxplot(dados1$duplo3~dados1$idade, xlab = "Age", ylab = "double3", names = c("Younger than","Older than"), main = "Boxplot of double3 due to age", col=c('grey','red'))
+
+```
+
+###Tests of the independent variables
+```{r}
+#Shapiro Wilk - Normality test
+
+#Shapiro wilk teste for variable Ritmo1
+ritmo1null <- dados1$ritmo1[dados1$idade==0]
+ritmo1one <- dados1$ritmo1[dados1$idade==1]
+
+test_1 <- shapiro.test(ritmo1null)
+test_2 <- shapiro.test(ritmo1one)
+
+test_1
+test_2
+
+
+#Shapiro wilk teste for variable Click1
+click1null <- dados1$click1[dados1$idade==0]
+click1one <- dados1$click1[dados1$idade==1]
+
+test_3 <- shapiro.test(click1null)
+test_4 <- shapiro.test(click1one)
+
+test_3
+test_4
+
+
+
+#Shapiro wilk teste for variable duplo1
+duplo1null <- dados1$duplo1[dados1$idade==0]
+duplo1one <- dados1$duplo1[dados1$idade==1]
+
+test_5 <- shapiro.test(duplo1null)
+test_6 <- shapiro.test(duplo1one)
+
+test_5
+test_6
+
+
+#Shapiro wilk teste for variable Ritmo2
+ritmo2null <- dados1$ritmo2[dados1$idade==0]
+ritmo2one <- dados1$ritmo2[dados1$idade==1]
+
+test_7 <- shapiro.test(ritmo2null)
+test_8 <- shapiro.test(ritmo2one)
+
+test_7
+test_8
+
+
+#Shapiro wilk teste for variable Click2
+click2null <- dados1$click2[dados1$idade==0]
+click2one <- dados1$click2[dados1$idade==1]
+
+test_9 <- shapiro.test(click2null)
+test_10 <- shapiro.test(click2one)
+
+test_9
+test_10
+
+
+
+#Shapiro wilk teste for variable duplo2
+duplo2null <- dados1$duplo2[dados1$idade==0]
+duplo2one <- dados1$duplo2[dados1$idade==1]
+
+test_11 <- shapiro.test(duplo2null)
+test_12 <- shapiro.test(duplo2one)
+
+test_11
+test_12
+
+
+
+#Shapiro wilk teste for variable ritmo3
+ritmo3null <- dados1$ritmo3[dados1$idade==0]
+ritmo3one <- dados1$ritmo3[dados1$idade==1]
+
+test_13 <- shapiro.test(ritmo3null)
+test_14 <- shapiro.test(ritmo3one)
+
+test_13
+test_14
+
+
+
+#Shapiro wilk teste for variable Click3
+click3null <- dados1$click3[dados1$idade==0]
+click3one <- dados1$click3[dados1$idade==1]
+
+test_15 <- shapiro.test(click3null)
+test_16 <- shapiro.test(click3one)
+
+test_15
+test_16
+
+
+
+#Shapiro wilk teste for variable duplo3
+duplo3null <- dados1$duplo3[dados1$idade==0]
+duplo3one <- dados1$duplo3[dados1$idade==1]
+
+test_17 <- shapiro.test(duplo3null)
+test_18 <- shapiro.test(duplo3one)
+
+test_17
+test_18
+```
+
+###From the Shapiro-Wilk test we conclude that the variables "click2" and "click3" are the only ones that are normalized. All the other aren't normalized.
+
+###So we proceed to perform the Wilcoxon test.
+
+```{r}
+#Wilcoxon Test
+
+wilcoxon_test_ritmo1 <- wilcox.test(dados1$ritmo1~dados1$idade,paired = FALSE)
+wilcoxon_test_ritmo1
+
+wilcoxon_test_click1 <- wilcox.test(dados1$click1~dados1$idade,paired = FALSE)
+wilcoxon_test_click1
+
+wilcoxon_test_duplo1 <- wilcox.test(dados1$duplo1~dados1$idade,paired = FALSE)
+wilcoxon_test_duplo1
+
+wilcoxon_test_ritmo2 <- wilcox.test(dados1$ritmo2~dados1$idade,paired = FALSE)
+wilcoxon_test_ritmo2
+
+wilcoxon_test_duplo2 <- wilcox.test(dados1$duplo2~dados1$idade,paired = FALSE)
+wilcoxon_test_duplo2
+
+wilcoxon_test_ritmo3 <- wilcox.test(dados1$ritmo3~dados1$idade,paired = FALSE)
+wilcoxon_test_ritmo3
+
+wilcoxon_test_duplo3 <- wilcox.test(dados1$duplo3~dados1$idade,paired = FALSE)
+wilcoxon_test_duplo3
+
+#Since the null hypothesis of this test is that the median is equal, the different medians are for the variables: duplo1,duplo2,ritmo3,duplo3
+```
+##################
+
+###Now we are going to do the ANOVA test for the normalized variables, "click2" and "click3".
+
+```{r}
+anova_click2 <- aov(dados1$click2 ~ dados1$idade, data=dados1)
+summary(anova_click2)
+
+anova_click3 <- aov(dados1$click3 ~ dados1$idade, data=dados1)
+summary(anova_click3)
+```
+#Both variables lead to p-value greater than alfa, so we can't rejected the null hypothesis, this means that there aren't significant statistical differences.
+
+```{r}
+"Divide the sample in training group and test group"
+
+data = dados1
+dim(data)
+
+indexes = sample(1:nrow(data), size = 0.3*nrow(data))
+
+test_group <- data[indexes,]
+dim(test_group)
+
+train_group <- data[-indexes,]
+dim(train_group)
+
+```
+
+#Now we are going to make the GLM model.
+
+```{r}
+#GML
+library(MASS)
+
+model <- glm(idade ~ (duplo1 + duplo2 + ritmo3 + duplo3), data=train_group,family = binomial )
+summary(model)
+
+#Model's equation
+#P = 1 / (1 + exp-(2.43366 + 0.28233*duplo1 + 0.29267*duplo2 - 0.15447*ritmo3 - 0.54537*duplo3))
+
+
+```
+
+```{r}
+
+#Combined Vectors
+v_1 <- coef(summary(model))[1,1]
+
+v_2 <- coef(summary(model))[2,1]
+
+v_3 <- coef(summary(model))[3,1]
+
+v_4 <- coef(summary(model))[4,1]
+
+v_5 <- coef(summary(model))[5,1]
+
+#The p-values sometimes are <alfa other are >alfa, so we are using all the variables to #construct the model.
+
+plot(v_2*train_group$duplo1+v_3*train_group$duplo2+v_4*train_group$ritmo3+v_5*train_group$duplo3,model$fitted.values,col=as.factor(train_group$idade),xlab = 'Combined Model',ylab = 'Corrected Values',main = 'GLM',pch=19)
+legend('bottomright',c('Older than','Younger than'),col = c('red','black'),merge=FALSE,pch = 20)
+#red -> older than
+#black -> younger than
+
+
+#Individual Plot's
+
+Color = train_group$idade == 1
+plot(train_group$duplo1,model$fitted.values, col = Color+1,xlab = "Double1",ylab = '')
+
+Color = train_group$idade == 1
+plot(train_group$duplo2,model$fitted.values, col = Color+1, xlab = "Double2",ylab = '')
+
+Color = train_group$idade == 1
+plot(train_group$ritmo3,model$fitted.values, col = Color+1,xlab = "Rythm3",ylab = '')
+
+Color = train_group$idade == 1
+plot(train_group$duplo3,model$fitted.values, col = Color+1,xlab = "Double3",ylab = '')
+
+
+
+```
+
+
+
+#Model's evaluation
+```{r}
+#Model's evaluation
+confint(model) #Trust intervals
+
+prediction_train <- predict(model,data = train_group)
+confirmation_train <- table(prediction_train>0.5,train_group$idade)
+#prediction_train
+#confirmation_train
+
+prediction_test <- predict(model,newdata = test_group)
+confirmation_test <- table(prediction_test>0.5,test_group$idade)
+#prediction_test
+#confirmation_test
+
+#Training Accuracy
+training_accuracy <- (confirmation_train[1,1]+confirmation_train[2,2])/(sum(confirmation_train))
+
+#Training Sensibility
+training_sensibility <- confirmation_train[1,1]/(confirmation_train[1,1]+confirmation_train[2,1])
+
+#Training Specificity
+training_specificity <- confirmation_train[2,2]/(confirmation_train[2,2]+confirmation_train[1,2])
+
+#Test Accuracy
+test_accuracy <- (confirmation_test[1,1]+confirmation_test[2,2])/(sum(confirmation_test))
+
+#Test Sensibility
+test_sensibility <- confirmation_test[1,1]/(confirmation_test[1,1]+confirmation_test[2,1])
+
+#Test Specificity
+test_specificity <- confirmation_test[2,2]/(confirmation_test[2,2]+confirmation_test[1,2])
+
+#Teste Hosmer-Lemeshow Test
+#This test evaluates the quality of fit for logistic regression
+#The test evaluates the adjusted model through the distances between the adjusted probabilities and the observed ones.
+
+library(ResourceSelection)
+hoslem.test(model$y, fitted(model), g=10)
+
+#Cox-Snell and Naguelkerke
+model_cox_snell <-  glm (idade~1, data = dados1, family = binomial)
+
+loglik <- logLik(model_cox_snell)
+loglik
+loglik_model <- logLik(model)
+loglik_model
+
+r_cox <- 1-(exp(loglik)/exp(loglik_model))^(2/length(dados1$idade))
+
+
+r_nag<- r_cox/(1-(exp(loglik[1]))^(2/length(dados1$idade)))
+
+print(sprintf('Value of C2 Cox-Snell=%s',r_cox))
+
+print(sprintf('Value of C2 Naguelkerke=%s',r_nag))
+```
+
+```{r}
+#Because the train and test groups are created randomly, we'll do several rep's
+#Runs
+new_models <- list()
+intersection <- list()
+values_duplo1 <- list()
+values_duplo2 <- list()
+values_ritmo3 <- list()
+values_duplo3 <- list()
+
+train_accuracy <- c()
+train_sensibility <- c()
+train_specificity <- c()
+
+test_accuracy1 <- c()
+test_sensibility1 <- c()
+test_specificity1 <- c()
+
+glm1 <- c()
+glm2 <- c()
+
+for(i in 1:500){
+  new_dados1 <- dados1
+  indice_2 <- sample(2,nrow(new_dados1),replace = TRUE,prob = c(0.7,0.3))
+  train_group_2 <- new_dados1[indice_2==1,]  #0
+  test_group_2 <- new_dados1[indice_2==2,]   #1
+  
+  new_models[[i]] <- glm(formula=idade~duplo1+duplo2+ritmo3+duplo3,data = train_group_2,family = binomial)
+  
+  intersection[[i]]<- lapply(new_models,coef)[[i]][1]
+  values_duplo1[[i]]<- lapply(new_models,coef)[[i]][2]
+  values_duplo2[[i]]<- lapply(new_models,coef)[[i]][3]
+  values_ritmo3[[i]]<- lapply(new_models,coef)[[i]][4]
+  values_duplo3[[i]]<- lapply(new_models,coef)[[i]][5]
+  
+  prediction1 <- predict(new_models[[i]],data=train_group_2)
+  confirmation1 <- table(prediction1>0.5,train_group_2$idade)
+  
+  train_accuracy <- c(train_accuracy, ((confirmation1[1,1]+confirmation1[2,2])/(sum(confirmation1))))
+  
+  train_sensibility <- c(train_sensibility,(confirmation1[1,1]/(confirmation1[1,1]+confirmation1[2,1])))
+  
+  train_specificity <- c(train_specificity, (confirmation1[2,2]/(confirmation1[2,2]+confirmation1[1,2])))
+  
+  
+  prediction2 <- predict(new_models[[i]],newdata=test_group_2)
+  confirmation2 <- table(prediction2>0.5,test_group_2$idade)
+  
+  test_accuracy1 <- c(test_accuracy1, (confirmation2[1,1]+confirmation2[2,2])/sum(confirmation2))
+  
+  test_sensibility1 <- c(test_sensibility1,(confirmation2[1,1]/(confirmation2[1,1]+confirmation2[2,1])))
+  
+  test_specificity1 <- c(test_specificity1, (confirmation2[2,2]/(confirmation2[2,2]+confirmation2[1,2])))
+  
+  glm1 <- c(glm1,(confirmation2[1,1]/(confirmation2[1,1]+confirmation2[1,2])))
+  glm2 <- c(glm2,(confirmation2[2,2]/(confirmation2[2,2]+confirmation2[2,1])))
+}
+
+```
+
+
+```{r}
+#Evaluation after the 500 runs
+
+#Training Accuracy
+mean(train_accuracy)
+
+#Train Sensibility
+mean(train_sensibility)
+
+#Train Specificity
+mean(train_specificity)
+
+#Test Accuracy
+mean(test_accuracy1)
+
+#Test Sensibility
+mean(test_sensibility1)
+
+#Test Specificity
+mean(test_specificity1)
+
+```
+
+
