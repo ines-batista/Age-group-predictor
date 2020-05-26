@@ -12,6 +12,8 @@ publisher of the site can adapt the offer to visitors as much as possible.
 
 --------------------------------------------------------------------------------------------------------------------------------
 Work made using R and MatLab.
+
 Authors: Xavier Pinho and Inês Félix.
+
 Course: Biostatistics, University of Coimbra, 2017/2018.
 --------------------------------------------------------------------------------------------------------------------------------
